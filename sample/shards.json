@@ -1,0 +1,14 @@
+{
+  "capacity_code": "E_CAPACITY",
+  "progress": {"done": ["s1->n0"]},
+  "shards": [
+    {"id": "s0", "load": 5},
+    {"id": "s1", "load": 4},
+    {"id": "s2", "load": 1},
+    {"id": "s3", "load": 2}
+  ],
+  "nodes": [
+    {"id": "n0", "capacity": 6},
+    {"id": "n1", "capacity": 6}
+  ]
+}
