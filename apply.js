@@ -1,4 +1,18 @@
-// apply.js：执行与幂等（基线：不记进度、不幂等）
+// apply.js：执行与幂等（按 progress.done 跳过已完成的搬移）
 export function applyMoves(moves, progress) {
-  return { applied: moves.length, skipped: 0, done: moves.map((move) => move[0]) };
+  const done = progress && Array.isArray(progress.done) ? progress.done.slice() : [];
+  const seen = new Set(done);
+  let applied = 0;
+  let skipped = 0;
+  for (const move of moves) {
+    const key = move[0] + "->" + move[1];
+    if (seen.has(key)) {
+      skipped += 1;
+      continue;
+    }
+    seen.add(key);
+    done.push(key);
+    applied += 1;
+  }
+  return { applied, skipped, done };
 }
